@@ -7,6 +7,12 @@
         values
             (#{name}, #{categoryId}, #{price}, #{image}, #{description}, #{createTime}, #{updateTime}, #{createUser}, #{updateUser}, #{status})
     </insert>
+    <delete id="deleteByIds">
+        delete from dish where id in
+        <foreach item="id" collection="ids" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
 
     <select id="pageQuery" resultType="com.sky.entity.Dish">
         select d.*, c.name as categoryName
